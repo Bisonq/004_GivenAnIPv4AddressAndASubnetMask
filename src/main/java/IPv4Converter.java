@@ -73,6 +73,12 @@ public class IPv4Converter {
         return "invalid addresses!";
     }
 
+    public int getNumberOfHostsAvailable(){
+        if(this.correctIpAddress && this.correctSubnetMask)
+            return (int) Math.pow(2, 32-getShortenedSubnetMask()) - 2;
+        return -1;
+    }
+
     protected boolean verifyInternetAddress(String ipAddress){
         String[] octets = ipAddress.split("\\.");
         if(octets.length != 4)
@@ -94,6 +100,21 @@ public class IPv4Converter {
                 return false;
         }
         return true;
+    }
+
+    public int getShortenedSubnetMask(){
+        if(this.correctIpAddress && this.correctSubnetMask){
+            int counter = 0;
+            String[] subnetMaskTab = this.subnetMask.split("\\.");
+            for(int i = 0 ; i < subnetMaskTab.length ; i++){
+            char[] maskTab = Integer.toBinaryString(Integer.parseInt(subnetMaskTab[i])).toCharArray();
+            for(char c : maskTab){
+                if(c == '1')
+                    counter++;
+            }}
+            return counter;
+        }
+        return -1;
     }
 
     public String getIpAddress() {

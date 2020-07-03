@@ -7,10 +7,12 @@ public class Main {
 
         System.out.println("IP: " + iPv4Converter.getIpAddress());
         System.out.println("Subnet Mask: " + iPv4Converter.getSubnetMask());
+        System.out.println("Shortened Subnet Mask: /" + iPv4Converter.getShortenedSubnetMask());
         System.out.println("Network Address: " + iPv4Converter.getNetworkAddress());
         System.out.println("Broadcast Address: " + iPv4Converter.getBroadcastAddress());
         System.out.println("First Host Address: " + iPv4Converter.getFirstHostAddress());
         System.out.println("Last Host Address: " + iPv4Converter.getLastHostAddress());
+        System.out.println("Number Of Hosts Available: " + iPv4Converter.getNumberOfHostsAvailable());
 
     }
 }
