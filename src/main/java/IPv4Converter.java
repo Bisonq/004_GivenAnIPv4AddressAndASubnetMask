@@ -79,6 +79,21 @@ public class IPv4Converter {
         return -1;
     }
 
+    public int getShortenedSubnetMask(){
+        if(this.correctIpAddress && this.correctSubnetMask){
+            int counter = 0;
+            String[] subnetMaskTab = this.subnetMask.split("\\.");
+            for(int i = 0 ; i < subnetMaskTab.length ; i++){
+                char[] maskTab = Integer.toBinaryString(Integer.parseInt(subnetMaskTab[i])).toCharArray();
+                for(char c : maskTab){
+                    if(c == '1')
+                        counter++;
+                }}
+            return counter;
+        }
+        return -1;
+    }
+
     protected boolean verifyInternetAddress(String ipAddress){
         if(ipAddress != null){
         String[] octets = ipAddress.split("\\.");
@@ -105,26 +120,15 @@ public class IPv4Converter {
         return true;
     }
 
-    public int getShortenedSubnetMask(){
-        if(this.correctIpAddress && this.correctSubnetMask){
-            int counter = 0;
-            String[] subnetMaskTab = this.subnetMask.split("\\.");
-            for(int i = 0 ; i < subnetMaskTab.length ; i++){
-            char[] maskTab = Integer.toBinaryString(Integer.parseInt(subnetMaskTab[i])).toCharArray();
-            for(char c : maskTab){
-                if(c == '1')
-                    counter++;
-            }}
-            return counter;
-        }
-        return -1;
-    }
-
     public String getIpAddress() {
-        return ipAddress;
+        if(this.correctIpAddress)
+            return ipAddress;
+        return "invalid addresses!";
     }
 
     public String getSubnetMask() {
-        return subnetMask;
+        if(this.correctSubnetMask)
+            return subnetMask;
+        return "invalid addresses!";
     }
 }
