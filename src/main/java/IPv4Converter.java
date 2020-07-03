@@ -80,6 +80,7 @@ public class IPv4Converter {
     }
 
     protected boolean verifyInternetAddress(String ipAddress){
+        if(ipAddress != null){
         String[] octets = ipAddress.split("\\.");
         if(octets.length != 4)
             return false;
@@ -87,6 +88,8 @@ public class IPv4Converter {
             if (!ifStringIsAMaximum3DigitNumber(octet))
                 return false;
         return true;
+        }
+        return false;
     }
 
     protected boolean ifStringIsAMaximum3DigitNumber(String s){
