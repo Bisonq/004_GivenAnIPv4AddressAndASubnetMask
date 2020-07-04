@@ -182,6 +182,7 @@ class IPv4ConverterTest {
     @Test
     @DisplayName("Converter should return true when String contain numbers")
     void test13(){
+        //given
         String number = "255";
         IPv4Converter converter = new IPv4Converter(number, null);
 
@@ -195,6 +196,7 @@ class IPv4ConverterTest {
     @Test
     @DisplayName("Converter should return false when String not contain numbers")
     void test14(){
+        //given
         String word = "some_words";
         IPv4Converter converter = new IPv4Converter(word, null);
 
@@ -205,4 +207,151 @@ class IPv4ConverterTest {
         assertFalse(result);
     }
 
+    @Test
+    @DisplayName("NetworkAddress should not be available when IPAddress and SubnetMask are invalid")
+    void test15(){
+        //given
+        String ipAddress = "1";
+        String subnetMaskAddress = "2";
+        IPv4Converter iPv4Converter = new IPv4Converter(ipAddress, subnetMaskAddress);
+
+        //when
+        String result = iPv4Converter.getNetworkAddress();
+
+        //then
+        assertEquals("invalid addresses!", result);
+    }
+
+    @Test
+    @DisplayName("BroadcastAddress should not be available when IPAddress and SubnetMask are invalid")
+    void test16(){
+        //given
+        String ipAddress = "1";
+        String subnetMaskAddress = "2";
+        IPv4Converter iPv4Converter = new IPv4Converter(ipAddress, subnetMaskAddress);
+
+        //when
+        String result = iPv4Converter.getBroadcastAddress();
+
+        //then
+        assertEquals("invalid addresses!", result);
+    }
+
+    @Test
+    @DisplayName("FirstHostAddress should not be available when IPAddress and SubnetMask are invalid")
+    void test17(){
+        //given
+        String ipAddress = "1";
+        String subnetMaskAddress = "2";
+        IPv4Converter iPv4Converter = new IPv4Converter(ipAddress, subnetMaskAddress);
+
+        //when
+        String result = iPv4Converter.getFirstHostAddress();
+
+        //then
+        assertEquals("invalid addresses!", result);
+    }
+
+    @Test
+    @DisplayName("LastHostAddress should not be available when IPAddress and SubnetMask are invalid")
+    void test18(){
+        //given
+        String ipAddress = "1";
+        String subnetMaskAddress = "2";
+        IPv4Converter iPv4Converter = new IPv4Converter(ipAddress, subnetMaskAddress);
+
+        //when
+        String result = iPv4Converter.getLastHostAddress();
+
+        //then
+        assertEquals("invalid addresses!", result);
+    }
+
+    @Test
+    @DisplayName("NumberOfHostsAvailable should not be available when IPAddress and SubnetMask are invalid")
+    void test19(){
+        //given
+        String ipAddress = "1";
+        String subnetMaskAddress = "2";
+        IPv4Converter iPv4Converter = new IPv4Converter(ipAddress, subnetMaskAddress);
+
+        //when
+        int result = iPv4Converter.getNumberOfHostsAvailable();
+
+        //then
+        assertEquals(-1, result);
+    }
+
+    @Test
+    @DisplayName("ShortenedSubnetMask should not be available when IPAddress and SubnetMask are invalid")
+    void test20(){
+        //given
+        String ipAddress = "1";
+        String subnetMaskAddress = "2";
+        IPv4Converter iPv4Converter = new IPv4Converter(ipAddress, subnetMaskAddress);
+
+        //when
+        int result = iPv4Converter.getShortenedSubnetMask();
+
+        //then
+        assertEquals(-1, result);
+    }
+
+    @Test
+    @DisplayName("IpAddress should not be available when IPAddress and SubnetMask are invalid")
+    void test21(){
+        //given
+        String ipAddress = "1";
+        String subnetMaskAddress = "2";
+        IPv4Converter iPv4Converter = new IPv4Converter(ipAddress, subnetMaskAddress);
+
+        //when
+        String result = iPv4Converter.getIpAddress();
+
+        //then
+        assertEquals("invalid addresses!", result);
+    }
+
+    @Test
+    @DisplayName("SubnetMask should not be available when IPAddress and SubnetMask are invalid")
+    void test22(){
+        //given
+        String ipAddress = "1";
+        String subnetMaskAddress = "2";
+        IPv4Converter iPv4Converter = new IPv4Converter(ipAddress, subnetMaskAddress);
+
+        //when
+        String result = iPv4Converter.getSubnetMask();
+
+        //then
+        assertEquals("invalid addresses!", result);
+    }
+
+    @Test
+    @DisplayName("Converter should not allow more then 3 decimal digits in word")
+    void test23(){
+        //given
+        String ipAddress = "1921";
+        IPv4Converter iPv4Converter = new IPv4Converter(null, null);
+
+        //when
+        boolean result = iPv4Converter.ifStringIsAMaximum3DigitNumber(ipAddress);
+
+        //then
+        assertFalse(result);
+    }
+
+    @Test
+    @DisplayName("Converter should not allow more then 3 decimal digits in IPAddress octet")
+    void test24(){
+        //given
+        String ipAddress = "1921.167.10.123";
+        IPv4Converter iPv4Converter = new IPv4Converter(null, null);
+
+        //when
+        boolean result = iPv4Converter.verifyInternetAddress(ipAddress);
+
+        //then
+        assertFalse(result);
+    }
 }
